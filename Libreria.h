@@ -5,8 +5,8 @@
 int cargar(int orden,int v[]);
 int burbuja(int orden, int v[]);
 int insercion(int orden,int v[]);
-int seleccion(int v[]);
-int QuickSort(int orden,int v[], int *A, int izq, int der);
+int seleccion(int orden, int v[]);
+int QuickSort(int orden,int v[], int izq, int der);
 int MergeSort(int orden, int v[]);
 int Mostrar(int orden,int v[]);
 int copiar(int orden,int v[],int k[]);
@@ -18,12 +18,12 @@ int copiar(int orden,int v[],int k[])
 int Mostrar(int orden,int v[])
 {
 	        int i;
-	        
+	        printf("\n\n");
 			for(i=0; i<orden ; i++)
 			{
 				printf("%d ",v[i]);
-
-}			}
+			}
+}			
 
 int cargar(int orden,int v[])  ///carga del vector
 {
