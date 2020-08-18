@@ -2,20 +2,22 @@
 #include<stdlib.h>
 #include<time.h>
 #include<conio.h>
+
 int cargar(int orden,int v[]);
 int burbuja(int orden, int v[]);
 int insercion(int orden,int v[]);
 int seleccion(int orden, int v[]);
 int QuickSort(int orden,int v[], int izq, int der);
-int MergeSort(int orden, int v[]);
+void mergeSort(int arr[], int l, int r);
+void merge(int arr[], int l, int m, int r);
 int Mostrar(int orden,int v[]);
 int copiar(int orden,int v[],int k[]);
-int copiar(int orden,int v[],int k[])
+int copiar(int orden,int v[],int k[]) /*Copia del vector a ordenar*/
 {
 	for(int i=0;i<orden;i++)
 	k[i]=v[i];
 }
-int Mostrar(int orden,int v[])
+int Mostrar(int orden,int v[]) /*Muestra del vector*/
 {
 	        int i;
 	        printf("\n\n");
@@ -25,7 +27,7 @@ int Mostrar(int orden,int v[])
 			}
 }			
 
-int cargar(int orden,int v[])  ///carga del vector
+int cargar(int orden,int v[])  /*carga del vector*/
 {
 	        int i;
 	        srand(time(NULL));
@@ -35,7 +37,7 @@ int cargar(int orden,int v[])  ///carga del vector
 			}
 			
 }
-int burbuja(int orden, int v[])  /// aki empieza metodo de la burbuja mejorada 
+int burbuja(int orden, int v[])  /*aki empieza metodo de la burbuja mejorada*/
 {
 	int i, j, aux;
 	for(i=0; i<orden; i++)
@@ -52,7 +54,7 @@ int burbuja(int orden, int v[])  /// aki empieza metodo de la burbuja mejorada
   	}
 }
 
-int insercion(int orden,int v[])	  /// aki empieza el metodo de insercion
+int insercion(int orden,int v[])	  /*aki empieza el metodo de insercion*/
 {
 	
   int i,pos, aux;
@@ -73,7 +75,7 @@ int insercion(int orden,int v[])	  /// aki empieza el metodo de insercion
       
 	
 }
-int seleccion(int orden, int v[])  /// aki empieza el metodo de seleccion
+int seleccion(int orden, int v[])  /*aki empieza el metodo de seleccion*/
 {
 
   int i,j, aux,min;
@@ -97,7 +99,7 @@ int seleccion(int orden, int v[])  /// aki empieza el metodo de seleccion
   
   
 }
-int QuickSort( int v[], int izq, int der) /// aki empieza el metodo de QuickSort
+int QuickSort( int v[], int izq, int der) /*aki empieza el metodo de QuickSort*/
 {
 
 
@@ -127,58 +129,75 @@ int QuickSort( int v[], int izq, int der) /// aki empieza el metodo de QuickSort
   QuickSort(v, i, der);
 	
 }
-int MergeSort(int orden, int v[])  ///aki empieza el metodo de MergeSort
-{
-  	// Declaracion de variables
-    ///int i, j, k;
-    ///int n_1 = (q - p) + 1;
-    //int n_2 = (r - q);
-    //int *L, *R;
 
-    // Asignacion de memoria
-    //L = (int*)malloc(n_1 * sizeof(int));
-    //R = (int*)malloc(n_2 * sizeof(int));
-
-    // Copia de datos del arreglo A en los subarreglos L y R
-    //for (i = 0; i < n_1; i++)
-    //{
-      //  L[i] = *(array + p + i);
-    //}
-
-    //for (j = 0; j < n_2; j++)
-    //{
-        //R[j] = *(array + q + j + 1);
-    //}
-
-    //i = 0;
-    //j = 0;
-
-    // Fusion de datos respetando el valor minimos entre dos arreglos
-    ///for (k = p; k < r + 1; k++)
-    //{
-        ///if (i == n_1)
-        //{
-            //*(array + k) = *(R + j);
-            //j =  j+ 1;
-        //}
-        //else if(j == n_2)
-        //{
-            //*(array + k) = *(L + i);
-            ///i = i + 1;
-        //}
-        //else
-        //{
-           // if (*(L + i) <= *(R + j))
-            //{
-              //  *(array + k) = *(L + i);
-                //i = i + 1;
-            //}
-            //else
-            //{
-               // *(array + k) = *(R + j);
-                //j = j + 1;
-            //}
-        //}
-    //}
+void merge(int arr[], int l, int m, int r) /* aki empieza el metodo de MergeSort*/
+{ 
+    int i, j, k; 
+    int n1 = m - l + 1; 
+    int n2 = r - m; 
+  
+    
+    int L[n1], R[n2]; 
+  
+    
+    for (i = 0; i < n1; i++) 
+        L[i] = arr[l + i]; 
+    for (j = 0; j < n2; j++) 
+        R[j] = arr[m + 1 + j]; 
+  
+    
+    i = 0;  
+    j = 0;
+    k = l;  
+    while (i < n1 && j < n2) { 
+        if (L[i] <= R[j]) { 
+            arr[k] = L[i]; 
+            i++; 
+        } 
+        else { 
+            arr[k] = R[j]; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+    
+    while (i < n1) { 
+        arr[k] = L[i]; 
+        i++; 
+        k++; 
+    } 
+  
+    
+    while (j < n2) { 
+        arr[k] = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+void mergeSort(int arr[], int l, int r) 
+{ 
+    if (l < r) { 
+        
+        int m = l + (r - l) / 2; 
+  
+         
+        mergeSort(arr, l, m); 
+        mergeSort(arr, m + 1, r); 
+  
+        merge(arr, l, m, r); 
+    } 
+}  
+    
+    
+    
+    
+    
+    
+    
+    
 	
-}
+	
+	
+	
+
