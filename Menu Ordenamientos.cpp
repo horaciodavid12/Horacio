@@ -4,9 +4,10 @@
 #include"Libreria.h"
 
 main()
-{   
-  	int salir, carga;
-  	int opcion, v[1000],i, orden, k[1000];
+{   /*Declaracion de variables*/
+	
+  	int salir, carga;	
+  	int opcion, v[100000],i, orden, k[100000];
   
     printf("\t************************************************************\n\n");
   	printf("\t****      Bienvenidos al Menu de Ordenamientos         *****\n\n"); 
@@ -52,9 +53,9 @@ main()
 	  		QuickSort(k,0,orden);
 	  		Mostrar(orden, k);
   			 break;
-  		case 5:  					  /*ordenamiento MergeSort*/
-	  			MergeSort(orden,k);
-	 		 
+  		case 5:  copiar(orden,v,k);	  /*ordenamiento MergeSort*/
+	  			mergeSort(v,0,orden-1);
+	 		 Mostrar(orden,v);
   		 	break;
   		case 6: salir;
   			printf("\n\n");
@@ -66,7 +67,7 @@ main()
 
 
   }
-  printf ("El programa finalizo");
+  printf("El programa finalizo");
 }
 
 
